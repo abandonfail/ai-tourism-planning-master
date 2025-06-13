@@ -37,7 +37,8 @@ class TourismPlanningAppTest {
     @Test
     void doChatWithRag() {
         String chatId = UUID.randomUUID().toString();
-        String message = "情侣旅行怎么选目的地更有氛围？";
+//        String message = "情侣旅行怎么选目的地更有氛围？";
+        String message = "我正在谈恋爱，打算去旅游，怎么选目的地有氛围一点";
         String answer =  tourismPlanningApp.doChatWithRag(message, chatId);
         Assertions.assertNotNull(answer);
     }

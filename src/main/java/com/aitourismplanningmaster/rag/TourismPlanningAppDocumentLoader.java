@@ -12,6 +12,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 旅游规划大师应用文档加载器
+ */
 @Component
 @Slf4j
 class TourismPlanningAppDocumentLoader {

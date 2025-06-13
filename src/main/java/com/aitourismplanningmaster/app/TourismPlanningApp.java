@@ -2,11 +2,13 @@ package com.aitourismplanningmaster.app;
 
 import com.aitourismplanningmaster.advisor.MyLoggerAdvisor;
 import com.aitourismplanningmaster.chatmemory.FileBasedChatMemory;
+import com.aitourismplanningmaster.rag.QueryRewriter;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.QuestionAnswerAdvisor;
+import org.springframework.ai.chat.client.advisor.api.Advisor;
 import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.chat.memory.InMemoryChatMemory;
 import org.springframework.ai.chat.model.ChatModel;
@@ -77,16 +79,26 @@ public class TourismPlanningApp {
     @Resource
     private VectorStore tourismPlanningAppVectorStore;
 
+    @Resource
+    private Advisor tourismPlanningAppRagCloudAdvisor;
+
+    @Resource
+    private QueryRewriter queryRewriter;
+
     public String doChatWithRag(String message, String chatId) {
+        // 查询重写
+        String rewrittenMessage = queryRewriter.doQueryRewrite(message);
         ChatResponse chatResponse = chatClient
                 .prompt()
-                .user(message)
+                .user(rewrittenMessage)
                 .advisors(spec -> spec.param(CHAT_MEMORY_CONVERSATION_ID_KEY, chatId)
                         .param(CHAT_MEMORY_RETRIEVE_SIZE_KEY, 10))
                 // 开启日志，便于观察效果
                 .advisors(new MyLoggerAdvisor())
-                // 应用知识库问答
+                // 应用本地知识库问答
                 .advisors(new QuestionAnswerAdvisor(tourismPlanningAppVectorStore))
+                //应用云知识库
+//                .advisors(tourismPlanningAppRagCloudAdvisor)
                 .call()
                 .chatResponse();
         String content = chatResponse.getResult().getOutput().getText();
