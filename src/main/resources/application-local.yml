@@ -1,0 +1,7 @@
+spring:
+  ai:
+    dashscope:
+      api-key: sk-67e2f10e18634be6ad46738c09325036
+      chat:
+        options:
+          model: qwen-plus

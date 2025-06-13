@@ -1,6 +1,15 @@
 spring:
   application:
     name: ai-tourism-planning-master
+  profiles:
+    active: local
+  ai:
+    dashscope:
+      api-key: your-api-key
+      chat:
+        options:
+          model: qwen-plus
+
 
 server:
   port: 8080

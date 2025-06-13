@@ -63,6 +63,12 @@
 			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
 			<version>2.8.8</version> <!-- 或最新版本 -->
 		</dependency>
+		<!-- Spring AI Alibaba -->
+		<dependency>
+			<groupId>com.alibaba.cloud.ai</groupId>
+			<artifactId>spring-ai-alibaba-starter</artifactId>
+			<version>1.0.0-M6.1</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -81,5 +87,15 @@
 			</plugin>
 		</plugins>
 	</build>
-
+	<!-- 需要引入仓库配置，才能下载到最新的 Spring AI 相关的依赖 -->
+	<repositories>
+		<repository>
+			<id>spring-milestones</id>
+			<name>Spring Milestones</name>
+			<url>https://repo.spring.io/milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
 </project>
