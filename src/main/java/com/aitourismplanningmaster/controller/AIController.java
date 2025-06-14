@@ -34,8 +34,8 @@ public class AIController {
      * @return
      */
     @GetMapping(value = "/tourism_app/chat/sse",produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    public BaseResponse<Flux<String>> doChatWithTourismPlanningAppSSE(String message, String chatId){
-        return ResultUtils.success(tourismPlanningApp.doChatByStream(message,chatId));
+    public Flux<String> doChatWithTourismPlanningAppSSE(String message, String chatId){
+        return tourismPlanningApp.doChatByStream(message,chatId);
     }
 
     /**
@@ -57,8 +57,8 @@ public class AIController {
      * @return
      */
     @GetMapping("/manus/chat")
-    public BaseResponse<SseEmitter> doChatWithManus(String message) {
+    public SseEmitter doChatWithManus(String message) {
         ChenManus chenManus = new ChenManus(allTools, dashscopeChatModel);
-        return ResultUtils.success(chenManus.runStream(message));
+        return chenManus.runStream(message);
     }
 }
