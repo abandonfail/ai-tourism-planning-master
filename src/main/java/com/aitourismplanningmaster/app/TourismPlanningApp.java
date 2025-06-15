@@ -1,7 +1,6 @@
 package com.aitourismplanningmaster.app;
 
 import com.aitourismplanningmaster.advisor.MyLoggerAdvisor;
-import com.aitourismplanningmaster.chatmemory.FileBasedChatMemory;
 import com.aitourismplanningmaster.rag.QueryRewriter;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;

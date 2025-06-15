@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: ai-tourism-planning-master
+  ai:
+    dashscope:
+      api-key: ${DASHSCOPE_API_KEY}
+      chat:
+        options:
+          model: qwen-plus
+
+# searchApi
+search-api:
+  api-key: ${SEARCH_API_KEY}
+
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+# springdoc-openapi
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
+  group-configs:
+    - group: 'default'
+      paths-to-match: '/**'
+      packages-to-scan: com.aitourismplanningmaster.controller
+# knife4j
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
